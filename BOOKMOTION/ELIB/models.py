@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 
 class Genre(models.Model):
@@ -30,22 +31,20 @@ class Book(models.Model):
     genres = models.ManyToManyField(Genre)
     is_available = models.BooleanField(verbose_name="Is Available",default=True)
     added_on = models.DateField(verbose_name="Added On",default=timezone.now)
-    slug = models.SlugField("Safe Url",max_length=260,null=True,blank=True)
 
     def __str__(self):
         return self.title
 
-    def save(self,*args,**kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title[:50])
-
-        self.title = self.title.title()
-
-        super().save(*args, **kwargs)
-
     class Meta:
         ordering = ['title']
 
+
+class BorrowedBook(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='user')
+    book = models.OneToOneField(Book,on_delete=models.CASCADE,related_name='book')
+    return_date = models.DateField('Return Date')
+    borrowed = models.DateField(verbose_name="Borrowed On",default=timezone.now)
+    fine = models.IntegerField('Fine',default=0)
 
 
 
