@@ -13,7 +13,7 @@ class Student(models.Model):
     def get_name(self):
         return self.user.first_name
 
-    def getuserid(self):
+    def get_user_id(self):
         return self.user.id
 
 
