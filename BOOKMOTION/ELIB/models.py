@@ -2,6 +2,14 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+import os
+import uuid
+
+
+def get_file_path(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s-%s.%s" % (instance.slug ,uuid.uuid4(), ext)
+    return os.path.join('books/', filename)
 
 
 class Genre(models.Model):
@@ -32,6 +40,11 @@ class Book(models.Model):
     genres = models.ManyToManyField(Genre)
     is_available = models.BooleanField(verbose_name="Is Available",default=True)
     added_on = models.DateField(verbose_name="Added On",default=timezone.now)
+    cover = models.ImageField(
+        verbose_name='Cover',
+        upload_to=get_file_path,
+        default='./books/elib_book.wep3'
+    )
 
     slug = models.SlugField(
         "Safe Url",
@@ -39,6 +52,7 @@ class Book(models.Model):
         blank=True,
         null=True,
     )
+    added_on = models.DateField(verbose_name="Added On", default=timezone.now)
 
     def save(self,*args,**kwargs):
         if not self.slug:
