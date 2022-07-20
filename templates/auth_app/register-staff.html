@@ -1,0 +1,58 @@
+{% extends '../layout.html' %}
+{% load static %}
+
+
+{% block content %}
+  <div>
+    <section style="background-color: #9A616D; padding: 2rem 0;">
+      <div class="container py-9">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+              <div class="row g-0">
+                <div class="col-md-9 col-lg-5 d-none d-md-block">
+                  <img style="width: 100%; height: 100%;" src="{% static 'images/elib_book.webp' %}"
+                    alt="login form" class="img-fluid" style="border-radius: 1rem ;" />
+                </div>
+                <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                  <div class="card-body p-4 p-lg-5 text-black">
+                    <form method="POST" action="{% url 'auth_app:register-student' %}">
+
+                      <div class="d-flex align-items-center mb-3 pb-1">
+                        <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                        <span class="h1 fw-bold mb-2 ml-8 ">ELIB</span>
+                      </div>
+                      <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Create Account Account</h5>
+
+                      {% if error_msg %}
+                        <div class="alert alert-danger" role="alert">
+                          {{error_msg}}
+                        </div>
+                      {% endif %}
+
+                      {{ form.as_p }}
+
+                      {% csrf_token %}
+
+                      <div class="pt-1 mb-4">
+                        <input class="btn btn-dark btn-lg btn-block" type="submit" value="Create Account">
+                      </div>
+
+                      <p class="mb-5 pb-lg-2" style="color: #393f81;"><a href="{% url 'auth_app:home' %}"
+                          style="color: #393f81;">Already have an account?
+                        </a>
+                      </p>
+
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  </div>
+{% endblock content %}
