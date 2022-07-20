@@ -1,8 +1,21 @@
+from django.forms import ModelForm
 from django import forms
-from django.contrib.auth.models import User
-from . import models
 
-class StudentUserForm(forms.ModelForm):
+from elib.models import Book, Genre
+
+
+class BookFormManager(ModelForm):
+    genres = forms.ModelMultipleChoiceField(
+        queryset=Genre.objects.all(),
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'genre'}),
+    )
+
     class Meta:
-        model = User
-        fields = ['first-name','last-name','username','password']
+        fields = ('title', 'description', 'author', 'cover')
+        model = Book
+
+    def __init__(self, *args, **kwargs):
+        super(BookFormManager, self).__init__(*args, **kwargs)
+
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control form-control-lg'
