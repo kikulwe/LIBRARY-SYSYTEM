@@ -1,4 +1,5 @@
 from django.urls import path
+# noinspection PyUnresolvedReferences
 from auth_app import views
 
 app_name = 'auth_app'
