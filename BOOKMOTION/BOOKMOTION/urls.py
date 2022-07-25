@@ -17,7 +17,5 @@ from django.contrib import admin
 from django.urls import include,path
 
 urlpatterns = [
-    path('ELIB/',
-         include('ELIB.urls')),
     path('admin/', admin.site.urls),
 ]
