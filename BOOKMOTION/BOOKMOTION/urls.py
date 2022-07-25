@@ -20,8 +20,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', include('ELIB.urls',namespace='ELIB')),
-    path('auth/', include('auth_app.urls', namespace='auth_app')),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
