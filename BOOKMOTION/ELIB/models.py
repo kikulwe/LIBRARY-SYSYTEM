@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 import os
 import uuid
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 
 def get_file_path(instance, filename):
@@ -78,6 +80,13 @@ class BorrowedBook(models.Model):
 
     def __str__(self):
         return"{} -{}".format(self.book.title, self.user.username)
+
+
+@receiver(post_delete, sender=BorrowedBook)
+def signal_function_name(sender, instance, using, **kwargs):
+    book = instance.book
+    book.is_available = True
+    book.save()
 
 
 
