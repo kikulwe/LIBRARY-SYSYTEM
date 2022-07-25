@@ -59,5 +59,45 @@ def borrow(request, slug):
         return redirect(reverse('elib:borrowed'))
 
 
+def borrowed(request):
+    if request.user.is_authenticated:
+        if request.user.is_staff:
+            records = models.BorrowedBook.objects.all().order_by('-borrowed')
+        else:
+            records = models.BorrowedBook.objects.filter(user=request.user).order_by('-borrowed')
+        context_data = {
+            'records': records
+        }
+        return render(request, 'elib/borrowed.html', context=context_data)
+
+    return redirect(reverse('auth_app:home'))
+
+
+def upload(request):
+    if request.user.is_authenticated:
+        if request.user.is_staff:
+            if request.method == "POST":
+                form = BookFormManager(request.POST)
+                if form.is_valid():
+                    form.save()
+                    return redirect(reverse('elib:home-page'))
+                return render(request, 'elib/upload.html', context={'form': form, 'error_msg': "Please valid data."})
+            return render(request, 'elib/upload.html', context={'form': BookFormManager()})
+
+        return redirect(reverse('elib:home-page'))
+
+    return redirect(reverse('auth_app:home'))
+
+
+def login(request):
+    return render(request, 'login.html')
+
+
+def librarian(request):
+    return render(request, 'Librarian signup.html')
+
+
+def student(request):
+    return render(request, 'student signup.html')
 
 
