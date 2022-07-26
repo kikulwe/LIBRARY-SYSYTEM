@@ -72,7 +72,7 @@ class Book(models.Model):
 
 
 class BorrowedBook(models.Model):
-    User = models.ForeignKey(User,on_delete=models.CASCADE,related_name='user')
+    User = models.ForeignKey(User,on_delete=models.CASCADE, related_name='user')
     book = models.OneToOneField(Book, on_delete=models.CASCADE, related_name='book')
     return_date = models.DateField('Return Date', blank=True, null=True)
     borrowed = models.DateField(verbose_name="Borrowed On", default=timezone.now)
