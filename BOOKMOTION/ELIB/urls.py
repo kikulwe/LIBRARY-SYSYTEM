@@ -1,7 +1,7 @@
 from django.urls import path
-from elib import views
+from ELIB import views
 
-app_name = 'elib'
+app_name = 'ELIB'
 
 urlpatterns = [
     path('', views.home, name='home-page'),

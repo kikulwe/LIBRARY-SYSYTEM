@@ -46,7 +46,7 @@ class Book(models.Model):
     cover = models.ImageField(
         verbose_name=_('Cover'),
         upload_to=get_file_path,
-        default='./books/elib_book.wep3'
+        default='./books/ELIB_book.wep3'
     )
     slug = models.SlugField(
         _("Safe Url"),
