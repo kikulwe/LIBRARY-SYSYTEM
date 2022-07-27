@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
+from auth_app.models import Student
+from django.utils.translation import gettext_lazy as _
+
 from django.utils.text import slugify
 import os
 import uuid
@@ -72,7 +74,7 @@ class Book(models.Model):
 
 
 class BorrowedBook(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE, related_name='user')
+    user = models.ForeignKey(Student,on_delete=models.CASCADE, related_name='user')
     book = models.OneToOneField(Book,on_delete=models.CASCADE, related_name='book')
     return_date = models.DateField('Return Date', blank=True, null=True)
     borrowed = models.DateField(verbose_name="Borrowed On",default=timezone.now)
