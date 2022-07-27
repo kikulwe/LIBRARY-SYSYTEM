@@ -10,3 +10,7 @@ class UserForm(ModelForm):
         widgets = {
             "password": forms.PasswordInput(attrs={'autocomplete': '0ff', 'data-toggle': 'password'}),
         }
+
+    def __int__(self,*args, **kwargs):
+        super(UserForm, self).__int__(*args, **kwargs)
+
