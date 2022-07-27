@@ -14,3 +14,8 @@ class UserForm(ModelForm):
     def __int__(self,*args, **kwargs):
         super(UserForm, self).__int__(*args, **kwargs)
 
+        for fieldname in ['username']:
+            self.fields[fieldname].help_text = None
+
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control form-control-lg'
