@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from elib import models
+from ELIB import models
 
-from elib.forms import BookFormManager
+from ELIB.forms import BookFormManager
 
 import datetime
 
@@ -80,11 +80,11 @@ def upload(request):
                 form = BookFormManager(request.POST)
                 if form.is_valid():
                     form.save()
-                    return redirect(reverse('elib:home-page'))
-                return render(request, 'elib/upload.html', context={'form': form, 'error_msg': "Please valid data."})
-            return render(request, 'elib/upload.html', context={'form': BookFormManager()})
+                    return redirect(reverse('ELIB:home-page'))
+                return render(request, 'ELIB/upload.html', context={'form': form, 'error_msg': "Please valid data."})
+            return render(request, 'ELIB/upload.html', context={'form': BookFormManager()})
 
-        return redirect(reverse('elib:home-page'))
+        return redirect(reverse('ELIB:home-page'))
 
     return redirect(reverse('auth_app:home'))
 
