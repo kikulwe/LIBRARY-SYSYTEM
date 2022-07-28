@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 class Student(AbstractUser):
     reg_no = models.CharField('Identity Card Number', unique=True, max_length=30, blank=True, null=True)
 
