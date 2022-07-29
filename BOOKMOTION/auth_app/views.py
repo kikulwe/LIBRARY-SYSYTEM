@@ -13,7 +13,7 @@ def home(request):
 
 def login_student(request):
     if request.user.is_authenticated:
-        return redirect(reverse('elib:home-page'))
+        return redirect(reverse('ELIB:home-page'))
     if request.method == "POST":
         reg_no = request.POST.get('reg_no')
         username = request.POST.get('username')
@@ -22,7 +22,7 @@ def login_student(request):
 
         if user is not None:
             login(request, user)
-            return redirect(reverse('elib:home-page'))
+            return redirect(reverse('ELIB:home-page'))
 
         return render(request, 'auth_app/login-student.html',
                       context={'error_msg': "Credentials not valid! Please try again."})
@@ -31,7 +31,7 @@ def login_student(request):
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect(reverse('elib:home-page'))
+        return redirect(reverse('ELIB:home-page'))
     if request.method == "POST":
         if Student.objects.filter(username=request.POST.get('username')):
             form = UserForm(request.POST)
@@ -46,7 +46,7 @@ def register(request):
 
 def login_staff(request):
     if request.user.is_authenticated:
-        return redirect(reverse('elib:home-page'))
+        return redirect(reverse('ELIB:home-page'))
     if request.method == "POST":
         reg_no = request.POST.get('reg_no')
         username = request.POST.get('username')
@@ -61,7 +61,7 @@ def login_staff(request):
 
             if user is not None:
                 login(request, user)
-                return redirect(reverse('elib:home-page'))
+                return redirect(reverse('ELIB:home-page'))
 
             return render(request, 'auth_app/login-staff.html',
                           context={'error_msg': "Credentials not valid! Please try again."})

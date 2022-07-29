@@ -1,7 +1,7 @@
 from django.urls import path
-from elib import views
+from ELIB import views
 
-app_name = 'elib'
+app_name = 'ELIB'
 
 urlpatterns = [
     path('', views.home, name='home-page'),
@@ -10,4 +10,6 @@ urlpatterns = [
     path('borrowed/', views.borrowed, name='borrowed'),
     path('upload/', views.upload, name='upload'),
 ]
+
+
 

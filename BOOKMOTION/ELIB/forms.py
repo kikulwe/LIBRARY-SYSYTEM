@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 
-from elib.models import Book, Genre
+from .models import Book, Genre
 
 
 class BookFormManager(ModelForm):
