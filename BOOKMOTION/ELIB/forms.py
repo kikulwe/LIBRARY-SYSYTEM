@@ -10,12 +10,13 @@ class BookFormManager(ModelForm):
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'genre'}),
     )
 
-    class Meta:
-        fields = ('title', 'description', 'author', 'cover')
-        model = Book
+class Meta:
+    fields = ('title', 'description', 'author', 'cover')
+    model = Book
 
-    def __init__(self, *args, **kwargs):
-        super(BookFormManager, self).__init__(*args, **kwargs)
+def __init__(self, *args, **kwargs):
+    super(BookFormManager, self).__init__(*args, **kwargs)
 
-        for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control form-control-lg'
+    for visible in self.visible_fields():
+        visible.field.widget.attrs['class'] = 'form-control form-control-lg'
+
