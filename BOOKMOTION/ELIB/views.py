@@ -77,7 +77,7 @@ def upload(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
             if request.method == "POST":
-                form = BookFormManager(request.POST)
+                form = BookFormManager(request.POST, request.FILES)
                 if form.is_valid():
                     form.save()
                     return redirect(reverse('ELIB:home-page'))
