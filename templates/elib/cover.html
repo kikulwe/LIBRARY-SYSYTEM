@@ -1,0 +1,23 @@
+{% extends '../layout.html' %}
+{% load static %}
+
+{% block content %}
+
+  <div class="grid-container">
+      {% for book in books %}
+        <div class="grid-item">
+          <a href="{% url 'elib:details' book.slug %}">
+            <img src="/media/{{book.cover}}" alt="">
+          </a>
+        </div>
+      {% endfor %}
+    
+  </div>
+
+  {% if not books %}
+    <div class="alert alert-primary" style="width: max-content; margin: 3rem auto;" role="alert">
+      No Books Found!
+    </div>
+  {% endif%}
+
+{% endblock content %}
